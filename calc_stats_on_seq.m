@@ -5,12 +5,18 @@ function [res] = calc_stats_on_seq(matrix_data, numofchar)
 pat_inf{1, 2} = 1; pat_inf{1, 1} = ''; line = 1;
 
 results = col2let(matrix_data);
-
     for i = 1 : subj_no
-        ne{i, 1} = strvcat(results(i, :));
-        ne{i, 1} = strrep(ne{i}','0','');
-        
+        for j = 1: 11
+            if ~strcmp(results(i, j), X)
+                ne{i, 1}(j) = results(i, j);
+            end
+        end
     end
+%     for i = 1 : subj_no
+%         ne{i, 1} = char(results(i, :));
+%         ne = strrep(ne,' ','');
+%     end
+
     for no_subj = 1 : subj_no
         for char_no = 1 : size(ne{no_subj}, 2) - (numofchar - 1)
             char_pattern = ne{no_subj}(char_no: char_no + (numofchar - 1));
